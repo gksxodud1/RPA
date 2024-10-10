@@ -18,3 +18,12 @@ print(name, end="\n\n")
 parkscore =df.loc[1]
 parkscore = df.loc[df['이름'] == 'Park']
 print(parkscore, end="\n\n")
+
+df.loc[df['이름']== 'Ho','수학'] = 90
+print(df, end="\n\n")
+
+df.loc[4] = ['oh',100,70,80]
+print(df, end="\n\n")
+
+df = df.drop([2], axis = 0)
+print(df, end= "\n\n")
