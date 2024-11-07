@@ -1,5 +1,21 @@
+
+from fastapi import File, UploadFile
+import shutil
+from pathlib import Path
+
+
+
 from fastapi import FastAPI
 app = FastAPI()
+
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    save_path = Path("static/uploads") / file.filename
+    save_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    with save_path.open("wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    return{filename": file.filename,"location":str(save_path)}
 
 @app.get("/")
 def read_root():
